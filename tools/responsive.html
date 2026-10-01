@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>QA Responsivo — LPS</title>
+  <style>
+    body { font: 13px/1.5 Consolas, monospace; background: #111; color: #ddd; padding: 16px; }
+    h2 { color: #c9a44c; font-size: 15px; margin: 18px 0 8px; }
+    iframe { border: 1px solid #444; display: block; margin-bottom: 6px; background: #fff; }
+    #frames div { margin-bottom: 14px; }
+    label { color: #9ad; }
+  </style>
+</head>
+<body>
+  <h1 style="font-size:16px">Harness de QA responsivo</h1>
+  <div id="frames"></div>
+  <script>
+    var PAGES = [
+      { url: "/", name: "home" },
+      { url: "/equipe/", name: "equipe" },
+      { url: "/areas-de-atuacao/familia/", name: "familia" },
+      { url: "/contato/", name: "contato" }
+    ];
+    var WIDTHS = [1440, 768, 390];
+    var container = document.getElementById("frames");
+    WIDTHS.forEach(function (w) {
+      PAGES.forEach(function (p) {
+        var wrap = document.createElement("div");
+        var lab = document.createElement("label");
+        lab.textContent = w + "px — " + p.name + " ";
+        var f = document.createElement("iframe");
+        f.width = w;
+        f.height = 520;
+        f.src = p.url;
+        f.setAttribute("data-w", w);
+        f.setAttribute("data-p", p.name);
+        wrap.appendChild(lab);
+        wrap.appendChild(f);
+        container.appendChild(wrap);
+      });
+    });
+  </script>
+</body>
+</html>
